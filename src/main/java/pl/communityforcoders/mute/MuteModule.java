@@ -37,18 +37,18 @@ public class MuteModule {
     Member member = guild.getMember(user);
 
     if (!member.hasPermission(Permission.KICK_MEMBERS)) {
-      channel.sendMessage(EmbedUtils.error(member.getAsMention(), new Field("Błąd", "Nie posiadasz uprawnień do tej komendy!", true))).queue();
+      channel.sendMessage(EmbedUtils.error(new Field("Błąd", "Nie posiadasz uprawnień do tej komendy!", true))).queue();
       return;
     }
 
     if (context.getMentionedUsers().size() == 0) {
-      channel.sendMessage(EmbedUtils.error(member.getAsMention(), new Field("Błąd", "Poprawne użycie: !unmute <mentions>!", true))).queue();
+      channel.sendMessage(EmbedUtils.error(new Field("Błąd", "Poprawne użycie: !mute <mentions>!", true))).queue();
       return;
     }
 
     List<Role> role = guild.getRolesByName("mute", true);
     if (role.size() == 0) {
-      channel.sendMessage(EmbedUtils.error(member.getAsMention(), new Field("Błąd wewnętrzny", "Skontaktuj się z administracją serwera.", true))).queue();
+      channel.sendMessage(EmbedUtils.error(new Field("Błąd wewnętrzny", "Skontaktuj się z administracją serwera.", true))).queue();
       return;
     }
 
@@ -58,7 +58,7 @@ public class MuteModule {
         .peek(target -> guild.getController().addRolesToMember(target, role.get(0)).queue())
         .count();
 
-    channel.sendMessage(EmbedUtils.agree(member.getAsMention(), new Field("Gotowe", "Wyciszenia zostały nałożone na " + (count == 0 ? "osób" : "osoby"), true))).queue();
+    channel.sendMessage(EmbedUtils.agree(new Field("Gotowe", "Wyciszenia zostały nałożone na " + (count == 0 ? "osób" : "osoby"), true))).queue();
   }
 
   @CommandManifest(name = "!unmute", type = ChannelType.TEXT)
@@ -66,18 +66,18 @@ public class MuteModule {
     Member member = guild.getMember(user);
 
     if (!member.hasPermission(Permission.KICK_MEMBERS)) {
-      channel.sendMessage(EmbedUtils.error(member.getAsMention(), new Field("Błąd", "Nie posiadasz uprawnień do tej komendy!", true))).queue();
+      channel.sendMessage(EmbedUtils.error(new Field("Błąd", "Nie posiadasz uprawnień do tej komendy!", true))).queue();
       return;
     }
 
     if (context.getMentionedUsers().size() == 0) {
-      channel.sendMessage(EmbedUtils.error(member.getAsMention(), new Field("Błąd", "Poprawne użycie: !unmute <mentions>!", true))).queue();
+      channel.sendMessage(EmbedUtils.error(new Field("Błąd", "Poprawne użycie: !unmute <mentions>!", true))).queue();
       return;
     }
 
     List<Role> role = guild.getRolesByName("mute", true);
     if (role.size() == 0) {
-      channel.sendMessage(EmbedUtils.error(member.getAsMention(), new Field("Błąd wewnętrzny", "Skontaktuj się z administracją serwera.", true))).queue();
+      channel.sendMessage(EmbedUtils.error(new Field("Błąd wewnętrzny", "Skontaktuj się z administracją serwera.", true))).queue();
       return;
     }
 
@@ -87,7 +87,7 @@ public class MuteModule {
         .peek(target -> guild.getController().removeRolesFromMember(target, role.get(0)).queue())
         .count();
 
-    channel.sendMessage(EmbedUtils.agree(member.getAsMention(), new Field("Gotowe", "Wyciszenia zostały zdjęte z " + ((count == 0 || count == 1) ? "osób" : "osoby"), true))).queue();
+    channel.sendMessage(EmbedUtils.agree(new Field("Gotowe", "Wyciszenia zostały zdjęte z " + ((count == 0 || count == 1) ? "osób" : "osoby"), true))).queue();
   }
 
 }
